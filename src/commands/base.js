@@ -306,25 +306,25 @@ class Command {
 			case 'guildOnly':
 				return message.embed({
 					description: `The \`${this.name}\` command must be used in a server channel.`,
-					color: 0xDC143C
+					color: 0xfefefa
 				});
 			case 'nsfw':
 				return message.embed({
 					description: `The \`${this.name}\` command can only be used in NSFW channels.`,
-					color: 0xdc143c
+					color: 0xfefefa
 				});
 			case 'permission': {
 				if(data.response) return message.reply(data.response);
 				return message.embed({
 					description: `You do not have permission to use the \`${this.name}\` command.`,
-					color: 0xdc143c
+					color: 0xfefefa
 				});
 			}
 			case 'clientPermissions': {
 				if(data.missing.length === 1) {
 					return message.embed({
 						description: `I need the "${permissions[data.missing[0]]}" permission for the \`${this.name}\` command to work.`,
-						color: 0xdc143c
+						color: 0xfefefa
 					});
 				}
 				return message.embed({
@@ -332,13 +332,13 @@ class Command {
 						I need the following permissions for the \`${this.name}\` command to work:
 						${data.missing.map(perm => permissions[perm]).join(', ')}
 					`,
-					color: 0xdc143c
+					color: 0xfefefa
 				});
 			}
 			case 'throttling': {
 				return message.embed({
 					description: `You may not use the \`${this.name}\` command again for another ${data.remaining.toFixed(1)} seconds.`,
-					color: 0xdc143c
+					color: 0xfefefa
 				});
 			}
 			default:
