@@ -189,7 +189,7 @@ class Argument {
 						${wait ? `The command will automatically be cancelled in ${this.wait} seconds.` : ''}
 					`}
 				`,
-				color: 0xdc143c
+				color: valid ? 0xfefefa : 0xdc143c
 			}));
 
 			// Get the user's response
@@ -281,7 +281,7 @@ class Argument {
 								${wait ? `The command will automatically be cancelled in ${this.wait} seconds.` : ''}
 							`}
 						`,
-						color: 0xdc143c
+						color: valid ? 0xfefefa : 0xdc143c
 					}));
 				} else if(results.length === 0) {
 					prompts.push(await msg.embed({
@@ -292,7 +292,7 @@ class Argument {
 								${wait ? `The command will automatically be cancelled in ${this.wait} seconds, unless you respond.` : ''}
 							`}
 						`,
-						color: 0xdc143c
+						color: 0xfefefa
 					}));
 				}
 
