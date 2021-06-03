@@ -304,28 +304,42 @@ class Command {
 	onBlock(message, reason, data) {
 		switch(reason) {
 			case 'guildOnly':
-				return message.reply(`The \`${this.name}\` command must be used in a server channel.`);
+				return message.embed({
+					description: `The \`${this.name}\` command must be used in a server channel.`,
+					color: 0xDC143C
+				});
 			case 'nsfw':
-				return message.reply(`The \`${this.name}\` command can only be used in NSFW channels.`);
+				return message.embed({
+					description: `The \`${this.name}\` command can only be used in NSFW channels.`,
+					color: 0xdc143c
+				});
 			case 'permission': {
 				if(data.response) return message.reply(data.response);
-				return message.reply(`You do not have permission to use the \`${this.name}\` command.`);
+				return message.embed({
+					description: `You do not have permission to use the \`${this.name}\` command.`,
+					color: 0xdc143c
+				});
 			}
 			case 'clientPermissions': {
 				if(data.missing.length === 1) {
-					return message.reply(
-						`I need the "${permissions[data.missing[0]]}" permission for the \`${this.name}\` command to work.`
-					);
+					return message.embed({
+						description: `I need the "${permissions[data.missing[0]]}" permission for the \`${this.name}\` command to work.`,
+						color: 0xdc143c
+					});
 				}
-				return message.reply(oneLine`
-					I need the following permissions for the \`${this.name}\` command to work:
-					${data.missing.map(perm => permissions[perm]).join(', ')}
-				`);
+				return message.embed({
+					description: oneLine`
+						I need the following permissions for the \`${this.name}\` command to work:
+						${data.missing.map(perm => permissions[perm]).join(', ')}
+					`,
+					color: 0xdc143c
+				});
 			}
 			case 'throttling': {
-				return message.reply(
-					`You may not use the \`${this.name}\` command again for another ${data.remaining.toFixed(1)} seconds.`
-				);
+				return message.embed({
+					description: `You may not use the \`${this.name}\` command again for another ${data.remaining.toFixed(1)} seconds.`,
+					color: 0xdc143c
+				});
 			}
 			default:
 				return null;
@@ -350,11 +364,14 @@ class Command {
 		}).join(owners.length > 2 ? ', ' : ' ') : '';
 
 		const invite = this.client.options.invite;
-		return message.reply(stripIndents`
-			An error occurred while running the command: \`${err.name}: ${err.message}\`
-			You shouldn't ever receive an error like this.
-			Please contact ${ownerList || 'the bot owner'}${invite ? ` in this server: ${invite}` : '.'}
-		`);
+		return message.embed({
+			description: stripIndents`
+				An error occurred while running the command: \`${err.name}: ${err.message}\`
+				You shouldn't ever receive an error like this.
+				Please contact ${ownerList || 'the bot owner'}${invite ? ` in this server: ${invite}` : '.'}
+			`,
+			color: 0xdc143c
+		});
 	}
 
 	/**
