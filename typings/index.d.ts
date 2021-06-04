@@ -410,7 +410,7 @@ declare module 'discord.js-commando' {
 		unknown?: boolean;
 	}
 
-	interface CommandoClientEvents extends ClientEvents {
+	export interface CommandoClientEvents extends ClientEvents {
 		commandBlock:
 		| [CommandoMessage, string, object?]
 		| [CommandoMessage, 'guildOnly' | 'nsfw']
